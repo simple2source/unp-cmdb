@@ -1,2 +1,2 @@
 # unp-cmdb
-use flask cmdb
+使用flask框架构建cmdb
