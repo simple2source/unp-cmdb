@@ -49,12 +49,12 @@ def u_id(uid):
     # 指定传入的uid为int类型
     return 'user id {}'.format(uid)
 
+
 @app.route('/t')
 def t():
     from flask import redirect, url_for
     print(request.endpoint)
     return redirect(url_for('user.index'))
-
 
 
 @app.route('/home/<list:subs>')

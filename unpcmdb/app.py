@@ -76,7 +76,6 @@ def configure_extensions(app):
 
     # Flask-Bootstrap
     bootstrap.init_app(app)
-    print('sasa')
 
     # Flask-Login
     login_manager.login_view = app.config["LOGIN_VIEW"]
