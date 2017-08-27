@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% set page_title = "Server Error" %}
+
+{% extends "base.html" %}
+{% block content %}
+
+<div class="panel page-panel">
+    <div class="panel-body page-body">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h1>500 - Server Error</h1>
+            <p>服务器内部发送错误!</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

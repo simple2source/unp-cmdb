@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import os
+import jinja2
 from flask import Flask, render_template
 from flask._compat import string_types
 from unpcmdb.extensions import (db, login_manager, cache, allows, limiter, csrf,
-                                alembic, themes, mail)
+                                alembic, themes, mail, bootstrap)
+from unpcmdb.user.views import user
+from unpcmdb.user.models import User
+from unpcmdb.auth.viwes import auth
 
 
 def create_app(config=None):
@@ -14,9 +18,13 @@ def create_app(config=None):
     :return:
     """
     app = Flask('unp')
+    # 指定jinjia2 template目录位置
+    tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+    app.jinja_loader = jinja2.FileSystemLoader(tmpl_dir)
     configure_app(app, config)
     configure_blueprints(app)
-
+    configure_extensions(app)
+    configure_errorhandlers(app)
     return app
 
 
@@ -38,9 +46,8 @@ def configure_app(app, config):
 
 def configure_blueprints(app):
     """配置蓝图注册到app实例"""
-    pass
-    # app.register_blueprint('', url_prefix=app.config["GOODS_URL_PREFIX"])
-    # app.register_blueprint('', url_prefix=app.config['ORGTREE_URL_PREFIX'])
+    app.register_blueprint(user, url_prefix=app.config["USER_URL_PREFIX"])
+    app.register_blueprint(auth, url_prefix=app.config['AUTH_URL_PREFIX'])
 
 
 def configure_extensions(app):
@@ -67,6 +74,10 @@ def configure_extensions(app):
     # Flask-Limiter
     limiter.init_app(app)
 
+    # Flask-Bootstrap
+    bootstrap.init_app(app)
+    print('sasa')
+
     # Flask-Login
     login_manager.login_view = app.config["LOGIN_VIEW"]
     login_manager.refresh_view = app.config["REAUTH_VIEW"]
@@ -74,18 +85,18 @@ def configure_extensions(app):
     login_manager.needs_refresh_message_category = \
         app.config["REFRESH_MESSAGE_CATEGORY"]
     # login_manager.anonymous_user = Guest
+    login_manager.init_app(app)
 
-    # @login_manager.user_loader
-    # def load_user(user_id):
-    #     """Loads the user. Required by the `login` extension."""
+    @login_manager.user_loader
+    def load_user(user_id):
+        """Loads the user. Required by the `login` extension."""
+
+        user_instance = User.query.filter_by(id=user_id).first()
+        if user_instance:
+            return user_instance
+        else:
+            return None
     #
-    #     user_instance = User.query.filter_by(id=user_id).first()
-    #     if user_instance:
-    #         return user_instance
-    #     else:
-    #         return None
-    #
-    # login_manager.init_app(app)
     #
     # # Flask-Allows
     # allows.init_app(app)

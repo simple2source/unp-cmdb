@@ -38,13 +38,13 @@ class DefaultConfig(object):
     #SQLALCHEMY_DATABASE_URI = "postgresql://flaskbb@localhost:5432/flaskbb"
     # For SQLite:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + basedir + '/' + \
-                              'flaskbb.sqlite'
+                              'unp.sqlite'
 
     # This option will be removed as soon as Flask-SQLAlchemy removes it.
     # At the moment it is just used to suppress the super annoying warning
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True
 
     # Security
     # ------------------------------
@@ -56,16 +56,7 @@ class DefaultConfig(object):
     # generated the SECRET_KEY. If no WTF_CSRF_SECRET_KEY is provided, it will
     # use the SECRET_KEY.
     WTF_CSRF_ENABLED = True
-    WTF_CSRF_SECRET_KEY = "reallyhardtoguess"
-
-    # Full-Text-Search
-    # ------------------------------
-    # This will use the "whoosh_index" directory to store the search indexes
-    WHOOSHEE_DIR = os.path.join(basedir, "whoosh_index", py_version)
-    # How long should whooshee try to acquire write lock? (defaults to 2)
-    WHOOSHEE_WRITER_TIMEOUT = 2
-    # Minimum number of characters for the search (defaults to 3)
-    WHOOSHEE_MIN_STRING_LEN = 3
+    WTF_CSRF_SECRET_KEY = '\xf0\xfc\x0fy\xf5\x04\xfd\xbeP\xdf\xda(\xbd\xe7Y'
 
     # Auth
     # ------------------------------
@@ -123,6 +114,3 @@ class DefaultConfig(object):
     REDIS_ENABLED = False
     REDIS_URL = "redis://localhost:6379"  # or with a password: "redis://:password@localhost:6379"
     REDIS_DATABASE = 0
-
-    # Plugin Folder
-    PLUGINS_FOLDER = os.path.join(basedir, "flaskbb", "plugins")

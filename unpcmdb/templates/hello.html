@@ -1,1 +1,8 @@
-<h1>hello, {{name}}!</h1>
+{% extends "base.html" %}
+{% block title %}欢迎，首页{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, world !</h1>
+</div>
+{% endblock %}
