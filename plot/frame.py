@@ -15,10 +15,10 @@ router = {'/abc': abc, '/xyz': xyz}
 
 
 def runserver(env, start_response):
-    print(env)
+    print(env)  # 服务端和客户端的环境变量，包括客户端访问url的路径以及查询字符串等信息
     print(env['QUERY_STRING'])
     start_response('200 OK', [('Content-Type', 'text/html')])
-    url_prefix = env['PATH_INFO']
+    url_prefix = env['PATH_INFO']  # 客户端的url后缀
     if url_prefix in router.keys():
         return router[url_prefix]()
     else:
