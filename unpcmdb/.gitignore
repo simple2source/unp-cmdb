@@ -5,6 +5,7 @@
 *.7z
 *.dmg
 *.gz
+migrations
 *.iso
 *.jar
 *.rar
@@ -12,7 +13,7 @@
 *.zip
 *.tgz
 *.tar.gz
-
+*.db
 # Logs and databases #
 ######################
 *.log
