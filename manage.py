@@ -6,6 +6,7 @@ from flask_script import Manager, Shell, prompt_bool
 from flask import request, render_template
 from unpcmdb.extensions import db
 from unpcmdb.user.models import User
+from unpcmdb.asset.models import Archetype, ArchetypeAttribute, Entity, EntityValue
 from unpcmdb import create_app, ListConverter
 
 basepath = os.path.dirname(os.path.abspath(__file__))
@@ -14,7 +15,8 @@ app.url_map.converters['list'] = ListConverter
 
 
 def make_shell_context():
-    return dict(app=app, db=db, User=User)
+    return dict(app=app, db=db, User=User, Archetype=Archetype,
+                ArchetypeAttribute=ArchetypeAttribute, Entity=Entity, EntityValue=EntityValue)
 
 manager = Manager(app)
 

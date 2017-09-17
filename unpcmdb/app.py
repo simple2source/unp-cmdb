@@ -9,6 +9,7 @@ from unpcmdb.extensions import (db, login_manager, cache, allows, limiter, csrf,
 from unpcmdb.user.views import user
 from unpcmdb.user.models import User
 from unpcmdb.auth.viwes import auth
+from unpcmdb.asset.viwes import asset
 
 
 def create_app(config=None):
@@ -48,13 +49,14 @@ def configure_blueprints(app):
     """配置蓝图注册到app实例"""
     app.register_blueprint(user, url_prefix=app.config["USER_URL_PREFIX"])
     app.register_blueprint(auth, url_prefix=app.config['AUTH_URL_PREFIX'])
+    app.register_blueprint(asset, url_prefix=app.config['ASSET_URL_PREFIX'])
 
 
 def configure_extensions(app):
     """Configures the extensions."""
 
     # Flask-WTF CSRF
-    csrf.init_app(app)
+    # csrf.init_app(app)
 
     # Flask-SQLAlchemy
     db.init_app(app)
