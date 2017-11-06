@@ -130,6 +130,19 @@ if __name__ == '__main__':
     # session.commit()
 
     """many to many"""
+    pen3 = Pen(name='iron', size='max')
+    cl3 = Color(style='gray')
+    pen3.color.append(cl3)  # 增加中间表记录，使用了relationship.pen.color是一个list
+    session.commit()
+
+    pen3 = session.query(Pen).filter(Pen.id == 4).first()
+    cl5 = session.query(Color).filter(Color.id == 5).first()
+    pen3.color.pop()  # 删除一条记录
+
+    session.commit()
+    # session.add(pen3)
+    # pen3.color.append(cl4)
+
 
     # add
     # pe2 = Pen(name='yaunzb', size='mde')
@@ -138,11 +151,12 @@ if __name__ == '__main__':
     # session.add(pe2)
     # session.commit()
 
+
     # exist 新增中间表记录
-    pe1 = session.query(Pen).filter(Pen.id == 2).first()
-    cl1 = session.query(Color).filter(Color.id == 3).first()
-    cl1.pen.append(pe1)
-    session.commit()
+    # pe1 = session.query(Pen).filter(Pen.id == 2).first()
+    # cl1 = session.query(Color).filter(Color.id == 3).first()
+    # cl1.pen.append(pe1)
+    # session.commit()
     # pe1.color.remove(cl1)  # delete 中间表关联的数据
 
     # res = session.query(Usein).filter(Usein.id == 1).first()

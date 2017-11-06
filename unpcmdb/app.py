@@ -31,7 +31,7 @@ def create_app(config=None):
 
 def configure_app(app, config):
     """配置项目"""
-    app.config.from_object('unpcmdb.configs.default.DefaultConfig')
+    app.config.from_object('myapp.configs.default.DefaultConfig')
 
     if isinstance(config, string_types) and \
             os.path.exists(os.path.abspath(config)):
@@ -42,7 +42,7 @@ def configure_app(app, config):
     app.config['CONFIG_PATH'] = config
 
     # 增加环境变量中配置
-    app.config.from_envvar("UNP_SETTING", silent=True)
+    app.config.from_envvar("MY_SETTING", silent=True)
 
 
 def configure_blueprints(app):
